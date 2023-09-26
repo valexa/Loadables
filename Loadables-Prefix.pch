@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Loadables' target in the 'Loadables' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>Apple80211Monitor.bundle</string>
+	<string>PreferencesMonitor.bundle</string>
+	<string>builtin:auto-login,privileged</string>
+	<string>loginwindow:login</string>
+	<string>IPConfiguration.bundle</string>
+	<string>QuickTime Plugin.plugin</string>
+	<string>Quartz Composer.webplugin</string>
+	<string>loginwindow:success</string>
+	<string>Microsoft Office.mdimporter</string>
+	<string>Logger.bundle</string>
+	<string>wwanConfig.bundle</string>
+	<string>HomeDirMechanism:login,privileged</string>
+	<string>builtin:authenticate,privileged</string>
+	<string>KernelEventMonitor.bundle</string>
+	<string>builtin:reset-password,privileged</string>
+	<string>MCXMechanism:login</string>
+	<string>InterfaceNamer.bundle</string>
+	<string>Bluetooth.bundle</string>
+	<string>PrinterNotifications.bundle</string>
+	<string>LinkConfiguration.bundle</string>
+	<string>builtin:forward-login,privileged</string>
+	<string>PPPController.bundle</string>
+	<string>loginwindow:done</string>
+	<string>IPMonitor.bundle</string>
+	<string>PKINITMechanism:auth,privileged</string>
+	<string>nsIQTScriptablePlugin.xpt</string>
+	<string>NetworkIdentification.bundle</string>
+	<string>HomeDirMechanism:status</string>
+	<string>builtin:policy-banner</string>
+	<string>iWork.mdimporter</string>
+	<string>EAPOLController.bundle</string>
+	<string>FamilyControls.bundle</string>
+	<string>PKINITMechanism.bundle</string>
+	<string>loginwindow.bundle</string>
+	<string>HomeDirMechanism.bundle</string>
+	<string>RestartAuthorization.bundle</string>
+	<string>MCXMechanism.bundle</string>
+	<string>loginKC.bundle</string>
+	<string>DiskUnlock.bundle</string>
+	<string>KerberosAgent.bundle</string>
+	<string>ACRRDaemon.plugin</string>
+	<string>AccountsConfigServiceRegistration.plugin</string>
+	<string>AirPortUserAgent.plugin</string>
+	<string>AppleHIDMouseAgent.plugin</string>
+	<string>AutoTimeZone.plugin</string>
+	<string>BTMMPortInUseAgent.plugin</string>
+	<string>BluetoothUserAgent-Plugin.plugin</string>
+	<string>BonjourEvents.plugin</string>
+	<string>CaptiveSystemAgent.plugin</string>
+	<string>CaptiveUserAgent.plugin</string>
+	<string>CertsKeychainMonitor.plugin</string>
+	<string>DiskSpaceLowMonitor.plugin</string>
+	<string>DiskUnmountWatcher.plugin</string>
+	<string>EAPOLMonitor.plugin</string>
+	<string>GSSNotificationForwarder.plugin</string>
+	<string>LocationMenu.plugin</string>
+	<string>PrinterMonitor.plugin</string>
+	<string>SCMonitor.plugin</string>
+	<string>ServerTMShares.plugin</string>
+	<string>SoftwareUpdatesAlertMonitor.plugin</string>
+	<string>alfUIplugin.plugin</string>
+	<string>com.apple.TimeMachine.System.plugin</string>
+	<string>com.apple.TimeMachine.plugin</string>
+	<string>com.apple.fsevents.matching.plugin</string>
+	<string>com.apple.iokit.matching.plugin</string>
+	<string>com.apple.notifyd.matching.plugin</string>
+	<string>com.apple.opendirectory.matching.plugin</string>
+	<string>com.apple.smb.preferences.plugin</string>
+	<string>iCalAlarmAgent.plugin</string>
+	<string>servermgrdRegistration.plugin</string>
+	<string>com.apple.cmio.registerassistantservice.xpc</string>
+	<string>com.apple.qtkitserver.xpc</string>
+</array>
+</plist>

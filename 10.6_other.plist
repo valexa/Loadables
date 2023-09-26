@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>NP-PPC-Dir-Shockwave</string>
+	<string>AppleWorks.mdimporter</string>
+	<string>nsIQTScriptablePlugin.xpt</string>
+	<string>iWork.mdimporter</string>
+	<string>Quartz Composer.webplugin</string>
+	<string>QuickTime Plugin.plugin</string>
+	<string>builtin:smartcard-sniffer,privileged</string>
+	<string>loginwindow:login</string>
+	<string>builtin:reset-password,privileged</string>
+	<string>builtin:auto-login,privileged</string>
+	<string>builtin:authenticate,privileged</string>
+	<string>loginwindow:success</string>
+	<string>HomeDirMechanism:login,privileged</string>
+	<string>loginwindow:done</string>
+	<string>HomeDirMechanism:status</string>
+	<string>MCXMechanism:login</string>
+	<string>Apple80211Monitor.bundle</string>
+	<string>Bluetooth.bundle</string>
+	<string>LinkConfiguration.bundle</string>
+	<string>Logger.bundle</string>
+	<string>EAPOLController.bundle</string>
+	<string>NetworkIdentification.bundle</string>
+	<string>InterfaceNamer.bundle</string>
+	<string>PowerManagement.bundle</string>
+	<string>IP6Configuration.bundle</string>
+	<string>PPPController.bundle</string>
+	<string>IPConfiguration.bundle</string>
+	<string>PreferencesMonitor.bundle</string>
+	<string>IPMonitor.bundle</string>
+	<string>PrinterNotifications.bundle</string>
+	<string>KernelEventMonitor.bundle</string>
+	<string>wwanConfig.bundle</string>
+	<string>JavaPlugin2_NPAPI.plugin</string>
+	<string>JavaPluginCocoa.bundle</string>
+	<string>Microsoft Office.mdimporter</string>
+	<string>flashplayer.xpt</string>
+	<string>Flash Player.plugin</string>
+	<string>QuickTime Plugin.plugin</string>	
+	<string>FamilyControls.bundle</string>
+	<string>PKINITMechanism.bundle</string>
+	<string>loginwindow.bundle</string>
+	<string>HomeDirMechanism.bundle</string>
+	<string>RestartAuthorization.bundle</string>
+	<string>MCXMechanism.bundle</string>
+	<string>loginKC.bundle</string>		
+	<string>ACRRDaemon.plugin</string>
+	<string>BTMMPortInUseAgent.plugin</string>
+	<string>PrinterMonitor.plugin</string>
+	<string>AirPortUserAgent.plugin</string>
+	<string>BluetoothUserAgent-Plugin.plugin</string>
+	<string>SCMonitor.plugin</string>
+	<string>AppleHIDMouseAgent.plugin</string>
+	<string>alfUIplugin.plugin</string>
+	<string>AutoTimeZone.plugin</string>
+	<string>ParentalControlsUEAPlugin.plugin</string>
+	<string>iCalAlarmAgent.plugin</string>
+</array>
+</plist>
