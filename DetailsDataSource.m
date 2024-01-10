@@ -13,7 +13,7 @@
 
 @synthesize rootItems;
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -38,19 +38,19 @@
     int index = 0;    
     NSMutableDictionary *ret = [NSMutableDictionary dictionaryWithCapacity:1];
     for (id object in array) {
-        [ret setObject:object forKey:[NSString stringWithFormat:@"%i",index]];
+        ret[[NSString stringWithFormat:@"%i",index]] = object;
         index++;
     }    
     return ret; 
 }
 
 - (id)itemAtIndex:(NSInteger)index inSortedDict:(NSDictionary *)dict{
-    NSArray *sortedKeys = [[dict allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    NSString *key = [sortedKeys objectAtIndex:index];
-    id item = [dict objectForKey:key];  
+    NSArray *sortedKeys = [dict.allKeys sortedArrayUsingSelector:@selector(compare:)];
+    NSString *key = sortedKeys[index];
+    id item = dict[key];  
     [refArray addObject:item];
-    NSString *ret = [NSString stringWithFormat:@"%i",[refArray count]-1];
-    [keysDict setObject:key forKey:ret];       
+    NSString *ret = [NSString stringWithFormat:@"%i",refArray.count-1];
+    keysDict[ret] = key;       
     if ([item isKindOfClass:[NSArray class]] || [item isKindOfClass:[NSDictionary class]]) {
         return item;        //has children, will get the label by doing opposite lookup (refArray indexOfObject)
     }else{
@@ -125,20 +125,20 @@
         return nil;
     }
     
-    NSString *ident = [tableColumn identifier];      
+    NSString *ident = tableColumn.identifier;      
         
     if ([ident isEqualToString:@"_one"]) {
         if ([item isKindOfClass:[NSString class]]) {
-            return [keysDict objectForKey:item];
+            return keysDict[item];
         }else{
-            return [keysDict objectForKey:[NSString stringWithFormat:@"%i",[refArray indexOfObject:item]]];
+            return keysDict[[NSString stringWithFormat:@"%i",[refArray indexOfObject:item]]];
         }        
     } 
     
     if ([ident isEqualToString:@"_two"]) {
         id object = nil;
         if ([item isKindOfClass:[NSString class]]) {
-            object = [refArray objectAtIndex:[item intValue]];        
+            object = refArray[[item intValue]];        
         }else{
             object = item;
         }

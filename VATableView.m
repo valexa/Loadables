@@ -12,7 +12,7 @@
 
 @dynamic delegate;
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -24,7 +24,7 @@
 
 - (NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-    NSPoint mousePoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    NSPoint mousePoint = [self convertPoint:theEvent.locationInWindow fromView:nil];
     NSInteger row = [self rowAtPoint:mousePoint];
     [self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
     //NSLog(@"Right clicked %ld",row);

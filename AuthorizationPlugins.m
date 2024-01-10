@@ -55,7 +55,7 @@
     
     if (err != noErr){
         NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:(NSInteger)err userInfo:nil];
-        NSLog(@"ListMechanisms error: %@",[error description]);        
+        NSLog(@"ListMechanisms error: %@",error.description);        
     }    
     
     return NULL;

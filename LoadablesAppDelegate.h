@@ -18,17 +18,11 @@
     DetailsDataSource *detailsDataSource;
     
     NSString *searchString;
-    
-    NSArray *leopardDefaults;
-    NSArray *leopardMachDefaults;
-    NSArray *leopardOtherDefaults;    
-    NSArray *lionDefaults;     
-    NSArray *lionMachDefaults; 
-    NSArray *lionOtherDefaults; 
-    NSArray *mlionDefaults;     
-    NSArray *mlionMachDefaults; 
-    NSArray *mlionOtherDefaults;     
-    
+
+    NSArray *machDefaults;
+    NSArray *latestMacOsDefaults;
+    NSArray *latestMacOsOtherDefaults;
+
 	NSMutableDictionary	 *sysDict;
 	NSMutableDictionary	 *usrDict;
 	NSMutableDictionary	 *osxDict;
