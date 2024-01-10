@@ -15,7 +15,7 @@
 
 @synthesize theBar,delegate;
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -23,54 +23,36 @@
 	
         //init array with icon params and start adding
         NSMutableDictionary *params =[NSMutableDictionary dictionaryWithCapacity:1];
-        
-        [params setObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                           @"Sharing", @"Name",
-                           @"Sharing Preferences", @"Tip",
-                           @"sharing", @"Icon",
-                           @"tbclickSharing:", @"Act", 
-                           nil] forKey:@"1"];
-        [params setObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                           @"Login", @"Name",
-                           @"Login Preferences", @"Tip",
-                           @"account", @"Icon",
-                           @"tbclickLogin:", @"Act", 
-                           nil] forKey:@"2"];
-        [params setObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                           @"Refresh", @"Name",
-                           @"Refresh the list", @"Tip",
-                           @"refresh", @"Icon",
-                           @"tbclickRefresh:", @"Act", 
-                           nil] forKey:@"3"];      	        
-        [params setObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                           @"Info", @"Name",
-                           @"Some things depend on user authorizations", @"Tip",
-                           @"info", @"Icon",
-                           @"tbclickInfo:", @"Act",
-                           nil] forKey:@"4"];   
-        [params setObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                           @"Search", @"Name",
-                           @"Search the table", @"Tip",
-                           nil] forKey:@"5"];           
-        
+
+        params[@"1"] = @{@"Name": @"Refresh",
+                           @"Tip": @"Refresh the list",
+                           @"Icon": @"refresh",
+                           @"Act": @"tbclickRefresh:"};
+        params[@"2"] = @{@"Name": @"Info",
+                           @"Tip": @"Some things depend on user authorizations",
+                           @"Icon": @"info",
+                           @"Act": @"tbclickInfo:"};
+        params[@"3"] = @{@"Name": @"Search",
+                           @"Tip": @"Search the tables"};
+
         //create icons from params
         items = [[NSMutableDictionary alloc] init];
         id key;
         NSEnumerator *loop = [params keyEnumerator];
         while ((key = [loop nextObject])) {
-            NSDictionary *dict = [params objectForKey:key];
-            [items setObject:[self configureToolbarItem: dict] forKey:[dict objectForKey: @"Name"]];
+            NSDictionary *dict = params[key];
+            items[dict[@"Name"]] = [self configureToolbarItem: dict];
         }
         
         //add generic items
-        [items setObject:[[[NSToolbarItem alloc] initWithItemIdentifier:NSToolbarSpaceItemIdentifier] autorelease] forKey:NSToolbarSpaceItemIdentifier];
-        [items setObject:[[[NSToolbarItem alloc] initWithItemIdentifier:NSToolbarFlexibleSpaceItemIdentifier] autorelease] forKey:NSToolbarFlexibleSpaceItemIdentifier];
-        [items setObject:[[[NSToolbarItem alloc] initWithItemIdentifier:NSToolbarFlexibleSpaceItemIdentifier] autorelease] forKey:NSToolbarFlexibleSpaceItemIdentifier];
-        [items setObject:[[[NSToolbarItem alloc] initWithItemIdentifier:NSToolbarSeparatorItemIdentifier] autorelease] forKey:NSToolbarSeparatorItemIdentifier];             
+        items[NSToolbarSpaceItemIdentifier] = [[[NSToolbarItem alloc] initWithItemIdentifier:NSToolbarSpaceItemIdentifier] autorelease];
+        items[NSToolbarFlexibleSpaceItemIdentifier] = [[[NSToolbarItem alloc] initWithItemIdentifier:NSToolbarFlexibleSpaceItemIdentifier] autorelease];
+        items[NSToolbarFlexibleSpaceItemIdentifier] = [[[NSToolbarItem alloc] initWithItemIdentifier:NSToolbarFlexibleSpaceItemIdentifier] autorelease];
+        items[NSToolbarSeparatorItemIdentifier] = [[[NSToolbarItem alloc] initWithItemIdentifier:NSToolbarSeparatorItemIdentifier] autorelease];             
         
         //add a toolbar
         theBar = [[NSToolbar alloc] initWithIdentifier:@"tbar"];
-        [theBar setDelegate:self];
+        theBar.delegate = self;
         [theBar setAllowsUserCustomization:YES];
         [theBar setAutosavesConfiguration:YES];
         
@@ -88,7 +70,7 @@
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
-    [delegate setSearchString:[[aNotification object] stringValue]];
+    delegate.searchString = [aNotification.object stringValue];
     [delegate reloadTables];
 }    
 
@@ -96,54 +78,47 @@
 
 - (NSToolbarItem *) configureToolbarItem: (NSDictionary *)optionsDict
 {
-	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:[optionsDict objectForKey:@"Name"]];
-	[item setPaletteLabel: [optionsDict objectForKey: @"Name"]];
-	[item setLabel: [optionsDict objectForKey: @"Name"]];
-	[item setToolTip: [optionsDict objectForKey: @"Tip"]];
+	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:optionsDict[@"Name"]];
+	item.paletteLabel = optionsDict[@"Name"];
+	item.label = optionsDict[@"Name"];
+	item.toolTip = optionsDict[@"Tip"];
     
-    if ([[optionsDict objectForKey: @"Name"] isEqualToString:@"Search"]) {
+    if ([optionsDict[@"Name"] isEqualToString:@"Search"]) {
         NSSearchField *srcfld = [[[NSSearchField alloc] init] autorelease];
-        [srcfld setDelegate:self];       
-        [item setView:srcfld];        
-        [item setMinSize:NSMakeSize(60,22)];
-        [item setMaxSize:NSMakeSize(140,22)];        
+        srcfld.delegate = self;       
+        item.view = srcfld;
     }else{
-        if([[optionsDict objectForKey: @"Icon"] isEqualToString:@"info"] && [self userIsRoot:NSUserName()] == YES) {
-            [item setImage:[[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(UTGetOSTypeFromString((CFStringRef)@"caut"))]];           
+        if([optionsDict[@"Icon"] isEqualToString:@"info"] && [self userIsRoot:NSUserName()] == YES) {
+            item.image = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(UTGetOSTypeFromString((CFStringRef)@"caut"))];           
         }else{
-            [item setImage:[NSImage imageNamed:[optionsDict objectForKey: @"Icon"]]];            
+            item.image = [NSImage imageNamed:optionsDict[@"Icon"]];            
         }    
-        [item setTarget:self];
-        [item setAction:NSSelectorFromString([optionsDict objectForKey: @"Act"])];        
+        item.target = self;
+        item.action = NSSelectorFromString(optionsDict[@"Act"]);        
     }
 	return [item autorelease];
 }
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)thetoolbar itemForItemIdentifier:(NSString *)itemIdentifier  willBeInsertedIntoToolbar:(BOOL)flag 
 {
-    return [items objectForKey:itemIdentifier];
+    return items[itemIdentifier];
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)thetoolbar
 {
-    return [items allKeys];
+    return items.allKeys;
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)thetoolbar
 {  
-    return [NSArray arrayWithObjects:             
-            @"Info",
+    return @[@"Info",
             NSToolbarSpaceItemIdentifier,
             NSToolbarSpaceItemIdentifier,
             NSToolbarSpaceItemIdentifier,            
             NSToolbarFlexibleSpaceItemIdentifier,            
             @"Refresh",            
-            NSToolbarFlexibleSpaceItemIdentifier, 
-            //@"Login",            
-            //@"Sharing",                        
-            @"Search",
-            //NSToolbarSeparatorItemIdentifier,            
-            nil];
+            NSToolbarFlexibleSpaceItemIdentifier,                        
+            @"Search"];
 }
 
 
@@ -161,57 +136,6 @@
     }else{
         [delegate discloseInfo];
     }       
-}   
-
-- (void)tbclickSharing:(NSToolbarItem*)item{
-	[self runAscript:@"\
-	 tell application \"System Preferences\" \n\
-	 activate \n\
-	 set the current pane to pane id \"com.apple.preferences.sharing\" \n\
-	 end tell"];
-}
-
-- (void)tbclickLogin:(NSToolbarItem*)item{
-	[self runAscript:@"\
-	 tell application \"System Preferences\" \n\
-	 activate \n\
-	 set the current pane to pane id \"com.apple.preferences.users\" \n\
-	 get the name of every anchor of pane id \"com.apple.preferences.users\" \n\
-	 reveal anchor \"startupItemsPref\" of pane id \"com.apple.preferences.users\" \n\
-	 end tell"];	      
-}
-
-
-- (void)runAscript:(NSString*)script
-{
-    NSDictionary* errorDict;
-    NSAppleEventDescriptor* returnDescriptor = NULL;
-	
-    NSAppleScript* scriptObject = [[NSAppleScript alloc] initWithSource:script];
-	
-    returnDescriptor = [scriptObject executeAndReturnError: &errorDict];
-    [scriptObject release];
-	
-    if (returnDescriptor != NULL)
-    {
-        // successful execution
-        if (kAENullEvent != [returnDescriptor descriptorType])
-        {
-            // script returned an AppleScript result
-            if (cAEList == [returnDescriptor descriptorType])
-            {
-				// result is a list of other descriptors
-            }
-            else
-            {
-                // coerce the result to the appropriate ObjC type
-            }
-        }
-    }
-    else
-    {
-		CFShow(errorDict);
-    }		
 }
 
 -(BOOL)userIsRoot:(NSString*)username{
